@@ -142,7 +142,7 @@ class Oa_controller extends Root_controller {
   }
 
   private function _combine_static_files () {
-    if (ENVIRONMENT !== 'production')
+    if (true || ENVIRONMENT !== 'production')
       return $this;
 
     if (!is_writable ($folder_path = FCPATH . implode (DIRECTORY_SEPARATOR, Cfg::system ('static', 'assets_folder'))))
@@ -158,8 +158,9 @@ class Oa_controller extends Root_controller {
           array_push ($this->component_lists[$key], base_url (array (implode ('/', Cfg::system ('static', 'assets_folder')), Cfg::system ('static', 'file_prefix') . get_parent_class ($this) . '_|_' . $this->get_class () . '_|_' . $this->get_method () . '.' . $key)));
           continue;
         }
+        $data = implode ("\r\n", array_map (function ($component) { return read_file (FCPATH . preg_replace ("|^(" . preg_quote (base_url ()) . ")|", '', $component)); }, $component_list));
 
-        $data = Cfg::system ('static', 'minify') ? $this->minify->$key->min (implode ('', array_map (function ($component) { return read_file (FCPATH . preg_replace ("|^(" . preg_quote (base_url ()) . ")|", '', $component)); }, $component_list))) : implode ('', array_map (function ($component) { return read_file (FCPATH . preg_replace ("|^(" . preg_quote (base_url ()) . ")|", '', $component)); }, $component_list));
+        $data = Cfg::system ('static', 'minify') ? $this->minify->$key->min ($data) : $data;
         $path = implode (DIRECTORY_SEPARATOR, array ($folder_path, Cfg::system ('static', 'file_prefix') . get_parent_class ($this) . '_|_' . $this->get_class () . '_|_' . $this->get_method () . '.' . $key));
 
         if (write_file ($path, $data, 'w+')) {

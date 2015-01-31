@@ -44,7 +44,6 @@ class Admin_controller extends Oa_controller {
     return $this->add_js (base_url (array ('resource', 'jquery_v1.10.2', 'jquery-1.10.2.min.js')))
                 ->add_js (base_url (array ('resource', 'jquery-ui-1.10.3.custom', 'jquery-ui-1.10.3.custom.min.js')))
                 ->add_js (base_url (array ('resource', 'jquery.jgrowl_v1.3.0', 'jquery.jgrowl.js')))
-                ->add_js (base_url (array ('resource', 'underscore_v1.7.0', 'underscore-min.js')))
                 ;
   }
 }
