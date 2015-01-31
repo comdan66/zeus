@@ -2,9 +2,9 @@
   <menu>
     <div id="wrapper">
       <ul class="menu">
-        <li class="item5"><a href="#">管理員</a>
+        <li class="item5"><a href="#">網站管理員</a>
           <ul>
-            <li class="subitem1"><a href="/admin/edit">更新管理員資料</a></li>
+            <li class="subitem1"><a href="/admin/edit">修改帳號密碼</a></li>
           </ul>
         </li>
       </ul>
