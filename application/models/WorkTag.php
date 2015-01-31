@@ -10,6 +10,9 @@ class WorkTag extends OaModel {
   static $table_name = 'work_tags';
 
   static $has_many = array (
+    array ('work_tag_mappings', 'class_name' => 'WorkTagMap'),
+    
+    array ('works', 'class_name' => 'Work', 'through' => 'work_tag_mappings')
   );
 
   public function __construct ($attributes = array (), $guard_attributes = true, $instantiating_via_find = false, $new_record = true) {

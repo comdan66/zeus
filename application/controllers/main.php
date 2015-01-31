@@ -12,9 +12,6 @@ class Main extends Site_controller {
   }
 
   public function index () {
-    echo '<meta http-equiv="Content-type" content="text/html; charset=utf-8" /><pre>';
-    var_dump (md5 ('123456'));
-    exit ();
-    $this->load_view (null);
+    // $this->load_view (null);
   }
 }

@@ -10,6 +10,7 @@ class WorkBlock extends OaModel {
   static $table_name = 'work_blocks';
 
   static $has_many = array (
+    array ('items', 'class_name' => 'WorkBlockItem')
   );
 
   public function __construct ($attributes = array (), $guard_attributes = true, $instantiating_via_find = false, $new_record = true) {

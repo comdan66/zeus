@@ -9,7 +9,15 @@ class Work extends OaModel {
 
   static $table_name = 'works';
 
+  static $has_one = array (
+  );
+
   static $has_many = array (
+    array ('work_tag_mappings', 'class_name' => 'WorkTagMap'),
+    
+    array ('tags', 'class_name' => 'WorkTag', 'through' => 'work_tag_mappings'),
+    array ('pics', 'class_name' => 'WorkPicture', 'foreign_key' => 'work_id'),
+    array ('blocks', 'class_name' => 'WorkBlock', 'foreign_key' => 'work_id')
   );
 
   public function __construct ($attributes = array (), $guard_attributes = true, $instantiating_via_find = false, $new_record = true) {
