@@ -17,7 +17,7 @@ class Admin_controller extends Oa_controller {
          ->set_content_path ('content', 'admin')
          ->set_public_path ('public')
 
-         ->set_title ("OA's CI")
+         ->set_title ("管理後台 - 宙思設計有限公司")
 
          ->_add_meta ()
          ->_add_css ()

@@ -1,0 +1,70 @@
+/**
+ * @author      OA Wu <comdan66@gmail.com>
+ * @copyright   Copyright (c) 2015 OA Wu Design
+ */
+@import "_oa";
+
+.add_spec {
+  margin-top: 5px;
+  float: right;
+}
+.textleft .files {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+.textleft .files .add_pic {
+  position: absolute;
+  right: 0;
+  top: 4px;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  padding: 8.5px;
+}
+.textleft .files .file {
+  width: calc(100% - 40px);
+  cursor: pointer;
+  border-bottom: 1px solid rgba(238, 238, 238, 1);
+}
+.error {
+  margin-bottom: 20px;
+  color: rgba(202, 12, 12, 1);
+}
+.grid-wrap {
+  overflow: visible;
+}
+section {
+  overflow: visible;
+}
+article {
+  overflow: visible;
+}
+table {
+  position: relative;
+
+  .delete {
+    position: absolute;
+    right: -10px;
+    top: -10px;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 1px solid rgba(255, 0, 0, .3);
+    text-align: center;
+
+    background-color: rgba(255, 50, 50, 1.00);
+    border: 1px solid rgba(212, 63, 58, 1.00);
+    cursor: pointer;
+
+    @include border-radius(50%);
+    @include box-shadow(1px 1px 3px 1px rgba(0, 0, 0, 0.3), inset 1px 1px 1px rgba(255, 255, 255, 0.4));
+
+    &:hover {
+      @include box-shadow(1px 1px 2px 1px rgba(0, 0, 0, 0.5), inset 1px 1px 1px rgba(255, 255, 255, 0.6))
+    }
+    &:active {
+      @include box-shadow(1px 1px 2px 1px rgba(0, 0, 0, 0.5), inset 1px 1px 1px rgba(0, 0, 0, 0.4))
+    }
+  }
+}
