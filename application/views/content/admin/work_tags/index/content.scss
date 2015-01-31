@@ -1,0 +1,23 @@
+/**
+ * @author      OA Wu <comdan66@gmail.com>
+ * @copyright   Copyright (c) 2015 OA Wu Design
+ */
+ 
+@import "_oa";
+
+table {
+  thead {
+    tr {
+      th {
+        background-color: rgba(247, 247, 247, 1);
+        padding: 10px;
+        border: 1px solid rgba(238, 238, 238, 1);
+      }
+    }
+  }
+}
+.textleft {
+  input {
+    width: 100%;
+  }
+}

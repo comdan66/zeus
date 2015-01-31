@@ -2,9 +2,14 @@
   <menu>
     <div id="wrapper">
       <ul class="menu">
+        <li class="item5"><a href="#">列表管理</a>
+          <ul>
+            <li class="subitem1"><a href="<?php echo base_url (array ('admin', 'work_tags'));?>">主列表</a></li>
+          </ul>
+        </li>
         <li class="item5"><a href="#">網站管理員</a>
           <ul>
-            <li class="subitem1"><a href="/admin/edit">修改帳號密碼</a></li>
+            <li class="subitem1"><a href="<?php echo base_url (array ('admin', 'edit'));?>">修改帳號密碼</a></li>
           </ul>
         </li>
       </ul>
