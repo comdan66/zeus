@@ -5,9 +5,9 @@
  * @copyright   Copyright (c) 2015 OA Wu Design
  */
 
-class User extends OaModel {
+class WorkBlockItem extends OaModel {
 
-  static $table_name = 'users';
+  static $table_name = 'work_block_items';
 
   static $has_many = array (
   );

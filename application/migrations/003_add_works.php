@@ -5,25 +5,23 @@
  * @copyright   Copyright (c) 2015 OA Wu Design
  */
 
-class Migration_Add_users extends CI_Migration {
+class Migration_Add_works extends CI_Migration {
   public function up () {
     $this->db->query (
-      "CREATE TABLE `users` (
+      "CREATE TABLE `works` (
         `id` int(11) NOT NULL AUTO_INCREMENT,
-        `account` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-        `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-        `login_count` int(11) NOT NULL DEFAULT '0',
-        `logined_at` datetime NOT NULL DEFAULT '" . date ('Y-m-d H:i:s') . "',
+        `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+        `content` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+        `file_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
         `created_at` datetime NOT NULL DEFAULT '" . date ('Y-m-d H:i:s') . "',
         `updated_at` datetime NOT NULL DEFAULT '" . date ('Y-m-d H:i:s') . "',
-        PRIMARY KEY (`id`),
-        KEY `account_password_index` (`account`, `password`)
+        PRIMARY KEY (`id`)
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;"
     );
   }
   public function down () {
     $this->db->query (
-      "DROP TABLE `users`;"
+      "DROP TABLE `works`;"
     );
   }
 }

@@ -19,7 +19,7 @@ class Migrate extends CI_Controller {
   }
 
   public function rollback ($version) {
-    // $this->migration->version ($version);
+    $this->migration->version ($version);
     // if (!$this->migration->version ($version))
     //   show_error ($this->migration->error_string ());
   }
