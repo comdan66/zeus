@@ -240,18 +240,18 @@
 
 			var notification = $('<div/>')
 				.addClass('jGrowl-notification ' + o.themeState + ' ui-corner-all' + ((o.group !== undefined && o.group !== '') ? ' ' + o.group : ''))
-				.append($('<div/>').addClass('jGrowl-close').addClass('little_red_point').html(o.closeTemplate));
-			
+				.append($('<div/>').addClass('jGrowl-close').html(o.closeTemplate));
+
 			if (o.header.length)
-				notification.append($('<div/>').addClass('jGrowl-header').html(o.header));				
-			
+				notification.append($('<div/>').addClass('jGrowl-header').html(o.header));
+
 			notification.append($('<div/>').addClass('jGrowl-message').html(message))
 				.data("jGrowl", o).addClass(o.theme).children('div.jGrowl-close').bind("click.jGrowl", function() {
 					$(this).parent().trigger('jGrowl.beforeClose');
 				})
 				.parent();
 
-				
+
 			/** Notification Actions **/
 			$(notification).bind("mouseover.jGrowl", function() {
 				$('div.jGrowl-notification', self.element).data("jGrowl.pause", true);
