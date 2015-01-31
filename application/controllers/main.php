@@ -12,20 +12,9 @@ class Main extends Site_controller {
   }
 
   public function index () {
+    echo '<meta http-equiv="Content-type" content="text/html; charset=utf-8" /><pre>';
+    var_dump (md5 ('123456'));
+    exit ();
     $this->load_view (null);
-    // $this->load_view (null, false, 10);
-  }
-
-  public function a () {
-    // $this->output->delete_cache ('main');
-    // $this->output->delete_all_cache ();
-  }
-
-  public function b () {
-    // return $this->output_json (array ('status' => true), 100);
-  }
-
-  public function delay () {
-    delay_job ('main', 'index', array ('sec' => 5));
   }
 }

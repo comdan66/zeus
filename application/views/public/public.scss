@@ -5,34 +5,48 @@
 
 @import "_oa";
 
-@include font-face("Monaco", font-files("/resource/font/monaco/monaco.ttf", "/resource/font/monaco/monaco.otf"));
-
-* {
-  vertical-align: top;
-  @include selection(rgba(150, 180, 230, 1.0000), rgba(237, 239, 244, 1.0000));
-  @include font-smoothing(antialiased);
-
-  &, &:after, &:before {
+.jGrowl {
+  &, &:after, &:before, *, *:after, *:before {
     @include box-sizing(border-box);
   }
-}
+  &.top-right {
+    top: 32px;
+  }
+  display: inline-block;
+  width: 200px;
+  padding: 5px 10px;
+  z-index: 999999;
 
-html {
-  height: 100%;
-
-  body {
-    position: relative;
+  .growl {
     display: inline-block;
-    text-align: center;
-    margin: 0;
+    margin: 5px 0;
     width: 100%;
-    height: 100%;
-    font-size: medium;
-    font-family: Monaco;
-    background: $mainBackgroundColor $mainBackgroundImage;
-    color: rgba(50, 50, 50, 0.7);
+    @include opacity(.6);
+    @include background-image(linear-gradient(top, rgba(75, 75, 75, 0.9) 0%, rgba(65, 65, 65, 0.9) 20%, rgba(45, 45, 45, 0.9) 90%, rgba(30, 30, 30, 0.9) 100%));
+    @include box-shadow(0 0 5px rgba(0, 0, 0, 0.8));
+    @include border-radius(3px);
+    @include transition(all .3s);
 
-    @include font-smoothing(antialiased);
-    @include box-shadow(none);
+    &:hover {
+      @include opacity(.8);
+    }
+    .jGrowl-close {
+      color: rgba(255, 255, 255, .7);
+      @include transition(all .3s);
+
+      &:hover {
+        color: rgba(255, 255, 255, 1);
+      }
+    }
+
+    &.jGrowl-closer {
+      padding: 3px 10px 6px 10px;
+      color: rgba(255, 255, 255, .7);
+      @include transition(all .3s);
+
+      &:hover {
+        color: rgba(255, 255, 255, 1);
+      }
+    }
   }
 }

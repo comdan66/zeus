@@ -24,13 +24,16 @@
     <div class="container">
 <?php echo render_cell ('admin_cells', 'main_header');?>
 
-      <div class="services-page main grid-wrap">
+      <div class="home-page main">
+        <section class="grid-wrap" >
   <?php echo render_cell ('admin_cells', 'sub_header');?>
-  <?php echo render_cell ('admin_cells', 'side_menu');?>
 
-  <?php echo isset ($content) ? $content : '';?>
+          <aside class="grid col-one-quarter mq2-col-full"></aside>
+    <?php echo isset ($content) ? $content : '';?>
+        </section>
       </div>
 <?php echo render_cell ('admin_cells', 'footer');?>
     </div>
+
   </body>
 </html>

@@ -22,6 +22,7 @@ class Admin_controller extends Oa_controller {
          ->_add_meta ()
          ->_add_css ()
          ->_add_js ()
+         ->add_hidden (array ('id' => '_flash_message', 'value' => identity ()->get_session ('_flash_message', true)))
          ;
   }
 
@@ -30,10 +31,20 @@ class Admin_controller extends Oa_controller {
   }
 
   private function _add_css () {
-    return $this;
+    return $this
+            ->add_css ('http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700')
+            ->add_css (base_url (array ('resource', 'admin', 'css', 'style.css')))
+            ->add_css (base_url (array ('resource', 'admin', 'css', 'form.css')))
+            ->add_css (base_url (array ('resource', 'admin', 'css', 'DropMenu05.css')))
+            ->add_css (base_url (array ('resource', 'jquery.jgrowl_v1.3.0', 'jquery.jgrowl.css')))
+            ;
   }
-
+  
   private function _add_js () {
-    return $this;
+    return $this->add_js (base_url (array ('resource', 'jquery_v1.10.2', 'jquery-1.10.2.min.js')))
+                ->add_js (base_url (array ('resource', 'jquery-ui-1.10.3.custom', 'jquery-ui-1.10.3.custom.min.js')))
+                ->add_js (base_url (array ('resource', 'jquery.jgrowl_v1.3.0', 'jquery.jgrowl.js')))
+                ->add_js (base_url (array ('resource', 'underscore_v1.7.0', 'underscore-min.js')))
+                ;
   }
 }

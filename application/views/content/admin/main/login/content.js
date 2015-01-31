@@ -2,10 +2,6 @@
  * @author      OA Wu <comdan66@gmail.com>
  * @copyright   Copyright (c) 2015 OA Wu Design
  */
-
-@import "_oa";
-
-#error {
-  width: 488px;
-  color: rgba(202, 12, 12, 1);
-}
+$(function() {
+  
+});
