@@ -114,7 +114,7 @@
                     <td>說明</td>
                       <td class="textleft" colspan='2'>
                         <input type='text' name='blocks[<?php echo $index;?>][items][<?php echo $c;?>][title]' value="<?php echo $item->title;?>" placeholder='請輸入文字內容..'/>
-                        <input type='text' name='blocks[<?php echo $index;?>][items][<?php echo $c;?>][link]' value="<?php echo $item->title;?>" placeholder='請輸入鏈結網址..'/>
+                        <input type='text' name='blocks[<?php echo $index;?>][items][<?php echo $c;?>][link]' value="<?php echo $item->link;?>" placeholder='請輸入鏈結網址..'/>
                       </td>
                   </tr>
           <?php }
