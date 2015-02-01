@@ -10,8 +10,8 @@
     <p class="mbottom">
       <?php echo $work->content;?>
     </p>
-<?php if ($work->blocks) {
-        foreach ($work->blocks as $block) { ?>
+<?php if ($blocks = WorkBlock::find ('all', array ('include' => array ('items'), 'conditions' => array ('work_id = ?', $work->id)))) {
+        foreach ($blocks as $block) { ?>
           <h6><?php echo $block->title;?></h6>
     <?php if ($block->items) { ?>
             <ul class="halfmbottom">
