@@ -6,7 +6,7 @@
 $(function() {
   $('.del_cate').click (function () {
     if ($(this).parents ('table').find ('tr').length <= 2)
-      $(this).parents ('table').append ($('<tr />').append ($('<td />').attr ('colspan', 5).text ('沒有任何產品分類')));
+      $(this).parents ('table').append ($('<tr />').append ($('<td />').attr ('colspan', 4).text ('沒有任何產品分類')));
 
     $.ajax ({
       url: $('#get_del_tag_url').val (),

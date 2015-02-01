@@ -12,8 +12,11 @@ class Works extends Site_controller {
   }
 
   public function index ($tag_name = '') {
-    if (($tag_name = urldecode ($tag_name)) && ($tag_name = field_array (WorkTag::find ('all', array ('select' => 'id', 'conditions' => array ('name = ?', $tag_name))), 'id')) && ($work_ids = field_array (WorkTagMap::find ('all', array ('select' => 'work_id', 'conditions' => array ('work_tag_id IN (?)', $tag_name))), 'work_id')))
-      $works = Work::find ('all', array ('conditions' => array ('id IN (?)', $work_ids)));
+    if ($tag_name = urldecode ($tag_name))
+      if (($tag_name = field_array (WorkTag::find ('all', array ('select' => 'id', 'conditions' => array ('name = ?', $tag_name))), 'id')) && ($tag_name = field_array (WorkTagMap::find ('all', array ('select' => 'work_id', 'conditions' => array ('work_tag_id IN (?)', $tag_name))), 'work_id')))
+        $works = Work::find ('all', array ('conditions' => array ('id IN (?)', $tag_name)));
+     else 
+        $works = array ();
     else
       $works = Work::find ('all', array ('conditions' => array ()));
     $this->load_view (array ('works' => $works));

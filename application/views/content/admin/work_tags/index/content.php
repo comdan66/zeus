@@ -18,8 +18,7 @@
           <tr>
             <th bgcolor="#F7F7F7">標題</th>
             <th width="50" bgcolor="#F7F7F7">排序</th>
-            <th width="90" bgcolor="#F7F7F7">子選項數量</th>
-            <th width="90" bgcolor="#F7F7F7">新增子選項</th>
+            <th width="90" bgcolor="#F7F7F7">子選項</th>
             <th width="50" bgcolor="#F7F7F7">刪除</th>
           </tr>
         </thead>
@@ -34,9 +33,6 @@
               <td class="textleft">
                 <input type='number' name='tags[<?php echo $i;?>][sort]' value="<?php echo $tag->sort;?>" maxlength='10' pattern=".{1,10}" required title="輸入10個字元以內" />
               </td>
-              <td class="textleft" style='text-align: center;'>
-                <a href="<?php echo base_url (array ('admin', 'work_tags', 'sub_tags', $tag->id));?>"><?php echo count ($tag->sub_tags);?></a>
-              </td>
               <td>
                 <a href="<?php echo base_url (array ('admin', 'work_tags', 'sub_tags', $tag->id));?>">新增子選項</a>
               </td>
@@ -46,7 +42,7 @@
             </tr>
     <?php }
         } else { ?>
-          <tr><td colspan='5'>沒有任何產品分類</td></tr>
+          <tr><td colspan='4'>沒有任何產品分類</td></tr>
   <?php } ?>
         </tbody>
       </table>
