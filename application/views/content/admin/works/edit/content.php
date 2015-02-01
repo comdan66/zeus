@@ -67,12 +67,12 @@
 
                 foreach ($tags as $tag) {?>
                   <div class='main'>
-                    <label><input type='checkbox' class='l' name='tag_ids[]' value='<?php echo $tag->id;?>'<?php echo $ids && in_array ($tag->id, $ids) ? ' checked' : '';?>/> <?php echo $tag->id;?></label>
+                    <label><input type='checkbox' class='l' name='tag_ids[]' value='<?php echo $tag->id;?>'<?php echo $ids && in_array ($tag->id, $ids) ? ' checked' : '';?>/> <?php echo $tag->name;?></label>
                   </div>
             <?php if ($tag->sub_tags) {
                     foreach ($tag->sub_tags as $sub_tag) { ?>
                       <div class='sub'>
-                        <label><input type='checkbox' class='l' name='tag_ids[]' value='<?php echo $sub_tag->id;?>'<?php echo $ids && in_array ($sub_tag->id, $ids) ? ' checked' : '';?>/> <?php echo $sub_tag->id;?></label>
+                        <label><input type='checkbox' class='l' name='tag_ids[]' value='<?php echo $sub_tag->id;?>'<?php echo $ids && in_array ($sub_tag->id, $ids) ? ' checked' : '';?>/> <?php echo $sub_tag->name;?></label>
                       </div>   
               <?php }
                   }
