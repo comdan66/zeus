@@ -17,7 +17,7 @@
             <ul class="halfmbottom">
         <?php foreach ($block->items as $item) { ?>
                 <li>
-                  <?php echo $item->link ? anchor ($item->link, $item->title, 'target="_blank"') : $item->title;?>
+                  <?php echo $item->link ? anchor ($item->link, $item->title, 'target="_blank"') . '<br /> - ' . $item->link : $item->title;?>
                 </li>
         <?php } ?>
             </ul>
