@@ -28,7 +28,7 @@
                 <div>
                   <h5>網頁設計</h5>
                   <p>德國Bywp-嘉豪光學台灣總代理<br>
-                  <a href="#">more</a></p>
+                  <a href="<?php echo base_url (array ('works'));?>">more</a></p>
                 </div>
               </figcaption>
             </figure>
@@ -41,7 +41,7 @@
                 <div>
                   <h5>平面設計</h5>
                   <p>台灣紡拓會國外展主視覺設計<br>
-                  <a href="#">more</a></p>
+                  <a href="<?php echo base_url (array ('works'));?>">more</a></p>
                 </div>
               </figcaption>
             </figure>
@@ -54,7 +54,7 @@
                 <div>
                   <h5>商業攝影</h5>
                   <p>台灣紡拓會國外展主視覺設計<br>
-                  <a href="#">more</a></p>
+                  <a href="<?php echo base_url (array ('works'));?>">more</a></p>
                 </div>
               </figcaption>
             </figure>
@@ -67,7 +67,7 @@
                 <div>
                   <h5>設計專案</h5>
                   <p>MySpotcam<br>
-                  <a href="#">more</a></p>
+                  <a href="<?php echo base_url (array ('works'));?>">more</a></p>
                 </div>
               </figcaption>
             </figure>
@@ -140,47 +140,48 @@
     </header>
     
     <figure class="grid col-one-quarter mq2-col-one-half">
-      <a href="work1.html">
+      <a href="<?php echo base_url (array ('works'));?>">
         <img src="<?php echo base_url (array ('resource', 'site', 'images', 'works', 'web.jpg'))?>" alt="網頁設計">
         <span class="zoom"></span>
       </a>
       <figcaption>
-        <a href="work1.html">網頁設計</a>
+        <a href="<?php echo base_url (array ('works'));?>">網頁設計</a>
         <p>EDM, 活動網站, 官網</p>
       </figcaption>
     </figure>
 
     <figure class="grid col-one-quarter mq2-col-one-half">
-      <a href="w_ga.html">
+      <a href="<?php echo base_url (array ('works'));?>">
         <img src="<?php echo base_url (array ('resource', 'site', 'images', 'works', 'web02.jpg'))?>" alt="平面設計">
         <span class="zoom"></span>
       </a>
       <figcaption>
-        <a href="w_ga.html">平面設計</a>
+        <a href="<?php echo base_url (array ('works'));?>">平面設計</a>
         <p>包裝, 書籍, DM, CIS (名片,信紙,logo...等)</p>
       </figcaption>
     </figure>
       
     <figure class="grid col-one-quarter mq2-col-one-half">
-      <a href="w_pg.html">
+      <a href="<?php echo base_url (array ('works'));?>">
         <img src="<?php echo base_url (array ('resource', 'site', 'images', 'works', 'web03.jpg'))?>" alt="攝影">
         <span class="zoom"></span>
       </a>
       <figcaption>
-        <a href="w_pg.html">攝影</a>
+        <a href="<?php echo base_url (array ('works'));?>">攝影</a>
         <p>商業攝影,婚禮攝影</p>
       </figcaption>
     </figure>
       
     <figure class="grid col-one-quarter mq2-col-one-half">
-      <a href="w_dp.html">
+      <a href="<?php echo base_url (array ('works'));?>">
         <img src="<?php echo base_url (array ('resource', 'site', 'images', 'works', 'web04.jpg'))?>" alt="">
         <span class="zoom"></span>
       </a>
       <figcaption>
-        <a href="w_dp.html">設計專案</a>
+        <a href="<?php echo base_url (array ('works'));?>">設計專案</a>
         <p>平面＋網頁</p>
       </figcaption>
     </figure>
+    
   </section>
 </div>

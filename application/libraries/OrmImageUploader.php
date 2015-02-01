@@ -78,7 +78,7 @@ class OrmImageUploader {
       $separate_symbol = Cfg::system ('model', 'uploader', 'file_name', 'separate_symbol');
 
       $this->CI->load->library ('ImageUtility');
-      $image = ImageUtility::create ($path, null, array ('resizeUp' => false));
+      $image = ImageUtility::create ($path, null, array ('resizeUp' => true));
 
       try {
         if (!is_writable ($path = utilitySameLevelPath (FCPATH . DIRECTORY_SEPARATOR . Cfg::system ('model', 'uploader', 'bucket', 'local', 'base_directory') . DIRECTORY_SEPARATOR)))
@@ -176,7 +176,7 @@ class OrmImageUploader {
 
         $result = '1';
         foreach ($versions as $version_key => $version_format) {
-          $image = ImageUtility::create ($tempFileName, null, array ('resizeUp' => false));
+          $image = ImageUtility::create ($tempFileName, null, array ('resizeUp' => true));
 
           try {
             $saveFileName = $fileName . ($auto_add_format ? '.' . $image->getFormat () : '');

@@ -2,6 +2,10 @@
 
 $route['default_controller'] = "main";
 
+$route['works/(:any)'] = "works/index/$1";
+$route['work/(:num)'] = "works/content/$1";
+$route['work/(:any)'] = "works/index";
+
 $route['admin']        = 'admin/main';
 $route['admin/edit']   = 'admin/main/edit';
 $route['admin/login']  = 'admin/main/login';
