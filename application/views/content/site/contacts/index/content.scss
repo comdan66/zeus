@@ -4,3 +4,8 @@
  */
 
 @import "_oa";
+
+.warning {
+  border: 1px solid rgba(221, 221, 221, 1);
+  @include box-sizing(border-box);
+}

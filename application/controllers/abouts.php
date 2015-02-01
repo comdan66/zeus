@@ -5,7 +5,7 @@
  * @copyright   Copyright (c) 2015 OA Wu Design
  */
 
-class Main extends Site_controller {
+class Abouts extends Site_controller {
 
   public function __construct () {
     parent::__construct ();

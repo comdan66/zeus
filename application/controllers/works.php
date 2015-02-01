@@ -5,13 +5,13 @@
  * @copyright   Copyright (c) 2015 OA Wu Design
  */
 
-class Main extends Site_controller {
+class Works extends Site_controller {
 
   public function __construct () {
     parent::__construct ();
   }
 
   public function index () {
-    $this->load_view ();
+    // $this->load_view (null);
   }
 }
