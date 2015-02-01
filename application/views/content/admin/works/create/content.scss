@@ -27,6 +27,9 @@
   cursor: pointer;
   border-bottom: 1px solid rgba(238, 238, 238, 1);
 }
+.textleft input[type='text'], .textleft select {
+  width: 100%;
+}
 .error {
   margin-bottom: 20px;
   color: rgba(202, 12, 12, 1);
@@ -42,7 +45,11 @@ article {
 }
 table {
   position: relative;
-
+  tr {
+    td:first-child {
+      background-color: rgba(248, 248, 248, .2);
+    }
+  }
   .delete {
     position: absolute;
     right: -10px;
@@ -67,4 +74,41 @@ table {
       @include box-shadow(1px 1px 2px 1px rgba(0, 0, 0, 0.5), inset 1px 1px 1px rgba(0, 0, 0, 0.4))
     }
   }
+}
+.textleft {
+  .main, .sub {
+    label {
+      margin: 0;
+      input[type='checkbox'] {
+        margin: 0;
+      }
+    }
+  }
+  .sub {
+    label {
+      font-weight: normal;
+      &:before {
+        content: "-";
+        margin-right: 10px;
+        margin-left: 10px;
+      }
+    }
+    & ~ .main {
+      margin-top: 10px;
+    }
+  }
+}
+td {
+  vertical-align: top;
+  .info {
+    font-size: 12px;
+    text-align: left;
+    color: rgba(111, 111, 111, .7);
+
+    &:first-child {
+      margin-top: 5px;
+      padding-top: 3px; 
+      border-top: 1px solid rgba(39, 40, 34, .2);
+    }
+  } 
 }

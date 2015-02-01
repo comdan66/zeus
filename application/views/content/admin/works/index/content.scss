@@ -16,3 +16,35 @@ table {
     }
   }
 }
+
+.textleft {
+  img {
+    width: 122px;
+    border: 1px solid rgba(39, 40, 34, .1);
+    @include transition(all .3s);
+
+    &:hover {
+      border: 1px solid rgba(39, 40, 34, .5);
+
+    }
+  }
+}
+.textleft {
+  &.w100 {
+    width: 100px;
+  }
+  @include clearfix();
+  span {
+    float: left;
+    padding: 1px 5px;
+    padding-right: 2px;
+
+    + span {
+      padding-left: 2px;
+      &::before {
+        content: ', ';
+        margin-right: 4px;
+      }
+    }
+  }
+}

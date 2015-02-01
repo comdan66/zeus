@@ -1,5 +1,5 @@
 <section class="grid col-three-quarters mq2-col-full">
-  <h2>列表管理 > 主列表</h2>
+  <h2>分類管理 > 分類列表</h2>
 
   <form action="<?php echo base_url (array ('admin', 'work_tags'));?>" method="post">
     <article id="navphilo">

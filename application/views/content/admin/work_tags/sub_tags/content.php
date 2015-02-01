@@ -1,5 +1,5 @@
 <section class="grid col-three-quarters mq2-col-full">
-  <h2>列表管理 > <a href='<?php echo base_url (array ('admin', 'work_tags'));?>'>主列表</a> > <a href='<?php echo base_url (array ('admin', 'work_tags', 'sub_tags', $parent_tag->id));?>'><?php echo $parent_tag->name;?></a></h2>
+  <h2>分類管理 > <a href='<?php echo base_url (array ('admin', 'work_tags'));?>'>分類列表</a> > <a href='<?php echo base_url (array ('admin', 'work_tags', 'sub_tags', $parent_tag->id));?>'><?php echo $parent_tag->name;?></a></h2>
 
   <form action="<?php echo base_url (array ('admin', 'work_tags', 'sub_tags', $parent_tag->id));?>" method="post">
     <article id="navphilo">

@@ -6,37 +6,40 @@
  */
 
 class Works extends Admin_controller {
+
   public function __construct () {
     parent::__construct ();
     identity ()->user () || redirect (array ('admin'));
   }
 
   private function _delete ($ids) {
-    array_map (function ($work) {
-      array_map (function ($block) {
-        if (($block->type == 'file_name') || $block->file_name)
-          $block->file_name->cleanAllFiles ();
+    if ($ids)
+      array_map (function ($work) {
+        array_map (function ($block) {
+          array_map (function ($item) { $item->delete (); }, $block->items);
+          $block->delete ();
+        }, $work->blocks);
 
-        $block->delete ();
-      }, $work->blocks);
+        array_map (function ($pic) {
+          $pic->file_name->cleanAllFiles ();
+          $pic->delete ();
+        }, $work->pics);
 
-      $work->delete ();
-    }, Work::find ('all', array ('conditions' => array ('id IN (?)', $ids))));
+        WorkTagMap::delete_all (array ('conditions' => array ('work_id = ?', $work->id)));
+
+        $work->file_name->cleanAllFiles ();
+        $work->delete ();
+      }, Work::find ('all', array ('conditions' => array ('id IN (?)', $ids))));
 
     identity ()->set_session ('_flash_message', '刪除成功!', true);
-
-    redirect (array ('admin', $this->get_class (), 'index'), 'refresh');
+    redirect (array ('admin', $this->get_class ()), 'refresh');
   }
 
   public function index ($offset = 0) {
-    $start       = trim ($this->input_post ('start'));
-    $end         = trim ($this->input_post ('end'));
-    $work_tag_id = trim ($this->input_post ('work_tag_id'));
-
     if ($delete_ids = $this->input_post ('delete_ids'))
       $this->_delete ($delete_ids);
 
-    $conditions = $start && $end && $work_tag_id ? array ('date BETWEEN ? AND ? AND work_tag_id = ?', $start, $end, $work_tag_id) : ($start && $end ? array ('date BETWEEN ? AND ?', $start, $end) : ($work_tag_id ? array ('work_tag_id = ?', $work_tag_id) : array ()));
+    $conditions = array ();
 
     $limit = 10;
     $total = Work::count (array ('conditions' => $conditions));
@@ -49,71 +52,47 @@ class Works extends Admin_controller {
     $prev_link = $now_page - 2 >= 0 ? base_url (array ('admin', $this->get_class (), $this->get_method (), ($now_page - 2) * $limit)) : '#';
     $pagination = array ('total' => $total, 'page_total' => $page_total, 'now_page' => $now_page, 'next_link' => $next_link, 'prev_link' => $prev_link);
 
-    $this->load_view (array ('works' => $works, 'pagination' => $pagination, 'work_tag_id' => $work_tag_id, 'start' => $start, 'end' => $end));
-  }
-
-  public function tags () {
-    if ($this->has_post ()) {
-      if (($name = trim ($this->input_post ('name'))) && verifyCreateOrm (WorkTag::create (array ('name' => $name, 'sort' => WorkTag::count () + 1))))
-        identity ()->set_session ('_flash_message', '新增成功!', true) && redirect (array ('admin', $this->get_class (), $this->get_method ()), 'refresh');
-
-      if ($tags = $this->input_post ('tags')) {
-        if ($delete_ids = array_diff (field_array (WorkTag::find ('all', array ('select' => 'id')), 'id'), array_map (function ($tag) { return $tag['id']; }, $tags))) {
-          WorkTag::delete_all (array ('conditions' => array ('id IN (?)', $delete_ids)));
-          Work::update_all (array ('set' => 'work_tag_id = 0', 'conditions' => array ('work_tag_id IN (?)', $delete_ids)));
-        }
-
-        array_map (function ($tag) {
-          if ($tag['id'] && trim ($tag['name']) && trim ($tag['sort']))
-            WorkTag::table ()->update ($set = array ('name' => trim ($tag['name']), 'sort' => trim ($tag['sort'])), array ('id' => $tag['id']));
-        }, $tags);
-
-        if (identity ()->set_session ('_flash_message', '修改成功!', true))
-          redirect (array ('admin', $this->get_class (), $this->get_method ()), 'refresh');
-      }
-    }
-
-    $tags = WorkTag::find ('all', array ('order' => 'sort DESC, id DESC'));
-    $this->load_view (array ('tags' => $tags));
+    $this->load_view (array ('works' => $works, 'pagination' => $pagination));
   }
 
   public function create () {
     if ($this->has_post ()) {
-      $title = trim ($this->input_post ('title'));
-      $file  = $this->input_post ('file', true, true);
-      $date  = trim ($this->input_post ('date'));
+      $title       = trim ($this->input_post ('title'));
+      $content     = trim ($this->input_post ('content'));
+      $file        = $this->input_post ('file', true, true);
+      $files       = $this->input_post ('files[]', true, true);
       $is_enabled  = $this->input_post ('is_enabled');
-      $work_tag_id = $this->input_post ('work_tag_id');
+      $tag_ids     = ($tag_ids = $this->input_post ('tag_ids')) ? $tag_ids : array ();
+      $blocks      = $this->input_post ('blocks');
 
-      $blocks = $this->input_post ('blocks');
-      $block_files = get_upload_file ('block_files', 'all', false);
-
-      if (true || ($title && $file && $date && is_numeric ($is_enabled))) {
-        if (verifyCreateOrm ($work = Work::create (array ('title' => $title ? $title : '', 'file_name' => '', 'content' => '', 'date' => $date ? $date : date ('Y-m-d'), 'is_enabled' => is_numeric ($is_enabled) ? $is_enabled : 1, 'work_tag_id' => $work_tag_id ? $work_tag_id : 0)))) {
+      if (verifyCreateOrm ($work = Work::create (array ('title' => $title ? $title : '', 'content' => $content ? $content : '', 'file_name' => '', 'is_enabled' => is_numeric ($is_enabled) ? $is_enabled : 1)))) {
+        if ($file)
           $work->file_name->put ($file);
-          $content = '';
-          if ($blocks)
-            foreach ($blocks as $i => $block) {
-              if ($block['type'] == 'youtube') {
-                parse_str (parse_url ($block['youtube'], PHP_URL_QUERY ), $block['youtube']);
-                $block['youtube'] = isset ($block['youtube']['v']) ? $block['youtube']['v'] : '';
-              }
-              $b = WorkBlock::create (array ('work_id' => $work->id, 'sort' => $block['sort'], 'youtube' => $block['type'] == 'youtube' ? $block['youtube'] : '', 'type' => $block['type'], 'title' => $block['type'] == 'title' ? $block['title'] : '', 'content' => $content .= $block['type'] == 'content' ? $block['content'] : '', 'file_name' => ''));
 
-              if ($block['type'] == 'file_name')
-                if (!$b->file_name->put (array_shift ($block_files)))
-                  $b->delete ();
-            }
-          $work->content = $content;
-          $work->save ();
+        if ($files)
+          foreach ($files as $file)
+            if (verifyCreateOrm ($pic = WorkPicture::create (array ('work_id' => $work->id, 'file_name' => ''))))
+              $pic->file_name->put ($file);
+            else 
+              @$pic->delete ();
 
-          identity ()->set_session ('_flash_message', '新增成功!', true);
-          redirect (array ('admin', $this->get_class ()));
-        } else {
-          @$work->delete ();
-        }
+        if ($tag_ids)
+          array_map (function ($tag) use ($work) {
+            WorkTagMap::create (array ('work_id' => $work->id, 'work_tag_id' => $tag->id));
+          }, WorkTag::find ('all', array ('select' => 'id', 'conditions' => array ('id IN (?)', $tag_ids))));
+
+        if ($blocks)
+          array_map (function ($block) use ($work) {
+            if (verifyCreateOrm ($b = WorkBlock::create (array ('work_id' => $work->id, 'title' => $block['title']))) && isset ($block['items']))
+              array_map (function ($item) use ($b) {
+                WorkBlockItem::create (array ('work_block_id' => $b->id, 'title' => $item['title'], 'link' => $item['link']));
+              }, $block['items']);
+          }, $blocks);
+
+        identity ()->set_session ('_flash_message', '新增成功!', true);
+        redirect (array ('admin', $this->get_class ()));
       } else {
-        $this->load_view (array ('message' => '填寫的資料不完整！'));
+        @$work->delete ();
       }
     } else {
       $this->load_view ();
@@ -125,57 +104,63 @@ class Works extends Admin_controller {
       redirect (array ('admin', $this->get_class ()));
 
     if ($this->has_post ()) {
-
-      $title = trim ($this->input_post ('title'));
-      $file  = $this->input_post ('file', true, true);
-      $date  = trim ($this->input_post ('date'));
+      $title       = trim ($this->input_post ('title'));
+      $content     = trim ($this->input_post ('content'));
+      $file        = $this->input_post ('file', true, true);
+      $pic_ids     = ($pic_ids = $this->input_post ('pic_ids')) ? $pic_ids : array ();
+      $files       = $this->input_post ('files[]', true, true);
       $is_enabled  = $this->input_post ('is_enabled');
-      $work_tag_id = $this->input_post ('work_tag_id');
+      $tag_ids     = ($tag_ids = $this->input_post ('tag_ids')) ? $tag_ids : array ();
+      $blocks      = $this->input_post ('blocks');
+      $old_tag_ids = field_array ($work->tags, 'id');
 
-      $old_blocks = $this->input_post ('old_blocks');
+      if ($file)
+        $work->file_name->put ($file);
 
-      $blocks = $this->input_post ('blocks');
-      $block_files = get_upload_file ('block_files', 'all', false);
+      if ($del_ids = array_diff (field_array ($work->pics, 'id'), $pic_ids))
+        array_map (function ($pic) {
+          $pic->file_name->cleanAllFiles ();
+          $pic->delete ();
+        }, WorkPicture::find ('all', array ('conditions' => array ('id IN (?) AND work_id = ?', $del_ids, $work->id))));
 
-      if (true || ($title && $date && is_numeric ($is_enabled))) {
-        if ($file)
-          $work->file_name->put ($file);
+      if ($files)
+        foreach ($files as $file)
+          if (verifyCreateOrm ($pic = WorkPicture::create (array ('work_id' => $work->id, 'file_name' => ''))))
+            $pic->file_name->put ($file);
+          else 
+            @$pic->delete ();
 
-        if ($delete_ids = array_diff (field_array ($work->blocks, 'id'), array_map (function ($block) {
-          if ($block['type'] == 'youtube') {
-            parse_str (parse_url ($block['youtube'], PHP_URL_QUERY ), $block['youtube']);
-            $block['youtube'] = isset ($block['youtube']['v']) ? $block['youtube']['v'] : '';
-          }
-          WorkBlock::table ()->update ($set = array ('sort' => $block['sort'], 'youtube' => $block['type'] == 'youtube' ? $block['youtube'] : '', 'title' => $block['type'] == 'title' ? $block['title'] : '', 'content' => $block['type'] == 'content' ? $block['content'] : ''), array ('id' => $block['id'])); return $block['id']; }, $old_blocks ? $old_blocks : array ())))
-          WorkBlock::delete_all (array ('conditions' => array ('id IN (?) AND work_id = ?', $delete_ids, $work->id)));
+      if ($del_ids = array_diff ($old_tag_ids, $tag_ids))
+        WorkTagMap::delete_all (array ('conditions' => array ('work_id = ? AND work_tag_id IN (?)', $work->id, $del_ids)));
 
-        $content = '';
-        if ($blocks)
-          foreach ($blocks as $i => $block) {
-            if ($block['type'] == 'youtube') {
-              parse_str (parse_url ($block['youtube'], PHP_URL_QUERY ), $block['youtube']);
-              $block['youtube'] = isset ($block['youtube']['v']) ? $block['youtube']['v'] : '';
-            }
-            $b = WorkBlock::create (array ('work_id' => $work->id, 'type' => $block['type'], 'youtube' => $block['type'] == 'youtube' ? $block['youtube'] : '', 'title' => $block['type'] == 'title' ? $block['title'] : '', 'content' => $content .= $block['type'] == 'content' ? $block['content'] : '', 'file_name' => ''));
+      if ($tag_ids = array_diff ($tag_ids, $old_tag_ids))
+        array_map (function ($tag) use ($work) {
+          WorkTagMap::create (array ('work_id' => $work->id, 'work_tag_id' => $tag->id));
+        }, WorkTag::find ('all', array ('select' => 'id', 'conditions' => array ('id IN (?)', $tag_ids))));
+      
+      if ($work->blocks)
+        array_map (function ($block) {
+          array_map (function ($item) {
+            $item->delete ();
+          }, $block->items);
 
-            if ($block['type'] == 'file_name')
-              if (!$b->file_name->put (array_shift ($block_files)))
-                $b->delete ();
-          }
+          $block->delete ();
+        }, $work->blocks);
 
-        $work->title = $title;
-        $work->date  = $date;
-        if ($content)
-          $work->content = $content;
-        $work->is_enabled   = $is_enabled;
-        $work->work_tag_id = $work_tag_id ? $work_tag_id : 0;
-        $work->save ();
+      if ($blocks)
+        array_map (function ($block) use ($work) {
+          if (verifyCreateOrm ($b = WorkBlock::create (array ('work_id' => $work->id, 'title' => $block['title']))) && isset ($block['items']))
+            array_map (function ($item) use ($b) {
+              WorkBlockItem::create (array ('work_block_id' => $b->id, 'title' => $item['title'], 'link' => $item['link']));
+            }, $block['items']);
+        }, $blocks);
 
-        identity ()->set_session ('_flash_message', '修改成功!', true);
-        redirect (array ('admin', $this->get_class ()));
-      } else {
-        $this->load_view (array ('message' => '填寫的資料不完整！', 'work' => $work));
-      }
+      $work->title = $title ? $title : '';
+      $work->content = $content ? $content : '';
+      $work->save ();
+
+      identity ()->set_session ('_flash_message', '修改成功!', true);
+      redirect (array ('admin', $this->get_class ()));
     } else {
       $this->load_view (array ('work' => $work));
     }
