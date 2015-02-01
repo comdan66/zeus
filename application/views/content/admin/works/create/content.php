@@ -45,7 +45,7 @@
           <tr>
             <td>分類</td>
             <td class="textleft">
-        <?php if ($tags = WorkTag::find ('all', array ('conditions' => array ('work_tag_id = ?', 0)))) {
+        <?php if ($tags = WorkTag::find ('all', array ('include' => array ('sub_tags'), 'conditions' => array ('work_tag_id = ?', 0)))) {
                 foreach ($tags as $tag) {?>
                   <div class='main'>
                     <label><input type='checkbox' class='l' name='tag_ids[]' value='<?php echo $tag->id;?>'/> <?php echo $tag->name;?></label>

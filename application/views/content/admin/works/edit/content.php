@@ -62,7 +62,7 @@
           <tr>
             <td>分類</td>
             <td class="textleft">
-        <?php if ($tags = WorkTag::find ('all', array ('conditions' => array ('work_tag_id = ?', 0)))) {
+        <?php if ($tags = WorkTag::find ('all', array ('include' => array ('sub_tags'), 'conditions' => array ('work_tag_id = ?', 0)))) {
                 $ids = field_array ($work->tags, 'id');
 
                 foreach ($tags as $tag) {?>
@@ -94,8 +94,8 @@
         </tbody>
       </table>
 
-<?php if ($work->blocks) {
-        foreach ($work->blocks as $index => $block) { ?>
+<?php if ($blocks = WorkBlock::find ('all', array ('include' => array ('items'), 'conditions' => array ('work_id = ?', $work->id)))) {
+        foreach ($blocks as $index => $block) { ?>
           <table data-index='<?php echo $index;?>' data-count='<?php echo count ($block->items);?>' width="100%" border="0" cellspacing="0" cellpadding="0" style='margin: 15px auto;'>
             <tbody>
               <tr>

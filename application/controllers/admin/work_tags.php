@@ -51,7 +51,7 @@ class Work_tags extends Admin_controller {
       }
     }
 
-    $tags = WorkTag::find ('all', array ('order' => 'sort ASC, id DESC', 'conditions' => array ('work_tag_id = ?', 0)));
+    $tags = WorkTag::find ('all', array ('order' => 'sort ASC, id DESC', 'include' => array ('sub_tags'), 'conditions' => array ('work_tag_id = ?', 0)));
     $this->add_hidden (array ('id' => 'get_del_tag_url', 'value' => base_url (array ('admin', $this->get_class (), 'del_tag'))))
          ->load_view (array ('tags' => $tags));
   }
