@@ -7,6 +7,9 @@
     </header>
 
     <aside class="grid col-one-quarter mq2-col-one-third mq3-col-full">
+    <p class="mbottom">
+      <?php echo $work->content;?>
+    </p>
 <?php if ($work->blocks) {
         foreach ($work->blocks as $block) { ?>
           <h6><?php echo $block->title;?></h6>
