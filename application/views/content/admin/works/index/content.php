@@ -11,7 +11,7 @@
       <button type="button" id="create" onClick='window.location.assign("<?php echo base_url (array ('admin', 'works', 'create'));?>");'>新增</button>
       
       <br/><br/>
-      
+
       <table width="100%" border="1" cellspacing="0" cellpadding="0">
         <thead>
           <tr>
@@ -48,7 +48,7 @@
       <?php }
           } else { ?>
             <tr>
-              <td colspan='6'>沒有任何資料產品</td>
+              <td colspan='7'>沒有任何資料產品</td>
             </tr>
     <?php } ?>
         </tbody>
