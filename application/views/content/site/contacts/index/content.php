@@ -44,27 +44,28 @@
   <section class="grid col-three-quarters mq2-col-two-thirds mq3-col-full">
     <h2>Drop us a message</h2>
 <?php if (isset ($message) && $message) { ?>
-  <p class="warning"><?php echo $message;?></p>
+        <p class="warning"><?php echo $message;?></p>
+<?php } else { ?>
+        <form id="contact_form" class="contact_form" action="<?php echo base_url (array ('contacts', 'submit'));?>" method="post" name="contact_form">  
+          <ul>
+            <li>
+              <label for="name">Your name:</label>
+              <input type="text" name="name" id="name" class="required" value="" placeholder='Your name..' pattern=".{1,}" required title="Your name!" />
+            </li>
+            <li>
+              <label for="email">Your Email:</label>
+              <input type="text" name="email" id="email" class="required email" value="" placeholder='EX: info@zeusdesign.com.tw' pattern=".{1,}" required title="Your Email!" />
+            </li> 
+            <li>
+              <label for="message">Message:</label>
+              <textarea name="message" id="message" cols="100" rows="6" class="required" pattern=".{1,}" required title="Your Message!" ></textarea>
+            </li>
+            <li>
+              <button type="submit" id="submit" name="submit" class="button fright">Send it</button>
+            </li> 
+          </ul>     
+        </form>
 <?php }?>
-    
-    <form id="contact_form" class="contact_form" action="<?php echo base_url (array ('contacts', 'submit'));?>" method="post" name="contact_form">  
-      <ul>
-        <li>
-          <label for="name">Your name:</label>
-          <input type="text" name="name" id="name" class="required" value="" placeholder='Your name..' pattern=".{1,}" required title="Your name!" />
-        </li>
-        <li>
-          <label for="email">Your Email:</label>
-          <input type="text" name="email" id="email" class="required email" value="" placeholder='info@zeusdesign.com.tw' pattern=".{1,}" required title="Your Email!" />
-        </li> 
-        <li>
-          <label for="message">Message:</label>
-          <textarea name="message" id="message" cols="100" rows="6" class="required" pattern=".{1,}" required title="Your Message!" ></textarea>
-        </li>
-        <li>
-          <button type="submit" id="submit" name="submit" class="button fright">Send it</button>
-        </li> 
-      </ul>     
-    </form>
+
   </section>  
 </div>

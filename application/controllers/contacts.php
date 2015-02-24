@@ -27,7 +27,6 @@ class Contacts extends Site_controller {
 
     if ($name && $email && $message) {
       $from = $email;
-      // $to = 'comdan66@gmail.com';
       $to = 'info@zeusdesign.com.tw';
       $subject = 'Contact form';
 
@@ -35,7 +34,7 @@ class Contacts extends Site_controller {
       $body .= 'Name: ' . $name . "\n";
       $body .= 'Email: ' . $email . "\n";
       $body .= "Message: \n\n" . $message . "\n";
-      // mail ($to, $subject, $body, "From: <$from>")
+      mail ($to, $subject, $body, "From: <$from>");
     }
     identity ()->set_session ('_message', '成功寄出！', true);
     redirect (array ($this->get_class ()), 'refresh');
