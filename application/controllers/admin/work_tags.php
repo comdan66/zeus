@@ -65,7 +65,7 @@ class Work_tags extends Admin_controller {
         identity ()->set_session ('_flash_message', '新增成功!', true) && redirect (array ('admin', $this->get_class (), $this->get_method (), $parent_tag->id), 'refresh');
 
       if ($tags = $this->input_post ('tags')) {
-        $this->_del (array_diff (field_array (WorkTag::find ('all', array ('select' => 'id')), 'id'), array_map (function ($tag) { return $tag['id']; }, $tags)));
+        $this->_del (array_diff (field_array ($parent_tag->sub_tags, 'id'), array_map (function ($tag) { return $tag['id']; }, $tags)));
 
         array_map (function ($tag) {
           if ($tag['id'] && trim ($tag['name']) && trim ($tag['sort']))
