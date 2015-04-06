@@ -11,10 +11,10 @@ class Works extends Site_controller {
     parent::__construct ();
   }
 
-  public function index ($tag_name = '') {
-    if ($tag_name = urldecode ($tag_name))
-      if (($tag_name = field_array (WorkTag::find ('all', array ('select' => 'id', 'conditions' => array ('name = ?', $tag_name))), 'id')) && ($tag_name = field_array (WorkTagMap::find ('all', array ('select' => 'work_id', 'conditions' => array ('work_tag_id IN (?)', $tag_name))), 'work_id')))
-        $works = Work::find ('all', array ('conditions' => array ('id IN (?) AND is_enabled = ?', $tag_name, 1)));
+  public function index ($id = 0) {
+    if ($id && is_numeric ($id))
+      if (($id = field_array (WorkTag::find ('all', array ('select' => 'id', 'conditions' => array ('id = ?', $id))), 'id')) && ($id = field_array (WorkTagMap::find ('all', array ('select' => 'work_id', 'conditions' => array ('work_tag_id IN (?)', $id))), 'work_id')))
+        $works = Work::find ('all', array ('conditions' => array ('id IN (?) AND is_enabled = ?', $id, 1)));
      else 
         $works = array ();
     else

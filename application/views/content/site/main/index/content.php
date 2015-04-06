@@ -28,7 +28,7 @@
                 <div>
                   <h5>網頁設計</h5>
                   <p>德國Bywp-嘉豪光學台灣總代理<br>
-                  <a href="<?php echo base_url (array ('works'));?>">more</a></p>
+                  <a href="<?php echo base_url (array ('works', 48));?>">more</a></p>
                 </div>
               </figcaption>
             </figure>
@@ -41,7 +41,7 @@
                 <div>
                   <h5>平面設計</h5>
                   <p>台灣紡拓會國外展主視覺設計<br>
-                  <a href="<?php echo base_url (array ('works'));?>">more</a></p>
+                  <a href="<?php echo base_url (array ('works', 48));?>">more</a></p>
                 </div>
               </figcaption>
             </figure>
@@ -54,7 +54,7 @@
                 <div>
                   <h5>商業攝影</h5>
                   <p>台灣紡拓會國外展主視覺設計<br>
-                  <a href="<?php echo base_url (array ('works'));?>">more</a></p>
+                  <a href="<?php echo base_url (array ('works', 48));?>">more</a></p>
                 </div>
               </figcaption>
             </figure>
@@ -67,7 +67,7 @@
                 <div>
                   <h5>設計專案</h5>
                   <p>MySpotcam<br>
-                  <a href="<?php echo base_url (array ('works'));?>">more</a></p>
+                  <a href="<?php echo base_url (array ('works', 48));?>">more</a></p>
                 </div>
               </figcaption>
             </figure>

@@ -9,10 +9,10 @@
     <menu>
 <?php if ($tags = WorkTag::find ('all', array ('include' => array ('sub_tags'), 'conditions' => array ('work_tag_id = ?', 0)))) {
         foreach ($tags as $tag) {?>
-          <a href='<?php echo base_url (array ('works', $tag->name));?>'><?php echo $tag->name;?></a><br>
+          <a href='<?php echo base_url (array ('works', urlencode ($tag->id)));?>'><?php echo $tag->name;?></a><br>
     <?php if ($tag->sub_tags) {
             foreach ($tag->sub_tags as $sub_tag) { ?>
-              <a href='<?php echo base_url (array ('works', $sub_tag->name));?>' class='meulist'>- <?php echo $sub_tag->name;?></a><br>
+              <a href='<?php echo base_url (array ('works', urlencode ($sub_tag->id)));?>' class='meulist'>- <?php echo $sub_tag->name;?></a><br>
       <?php }
           }
         }
