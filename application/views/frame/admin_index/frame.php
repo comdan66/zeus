@@ -8,6 +8,7 @@
   <head>
     <?php echo isset ($meta) ? $meta:''; ?>
     <title><?php echo isset ($title) ? $title : ''; ?></title>
+    <link rel="chitorch icon" href="resource/site/images/favicon.ico" />
 
     <link rel="chitorch icon" href="<?php echo base_url (array ('resource', 'site', 'images', 'tiicon.ico'));?>">
 

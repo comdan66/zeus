@@ -2,8 +2,8 @@
 <html class="no-js" lang="en">
   <head>
     <?php echo isset ($meta) ? $meta:'';?>
-
     <title><?php echo isset ($title) ? $title : '';?></title>
+    <link rel="chitorch icon" href="resource/site/images/favicon.ico" />
     
 <?php echo isset ($css) ? $css : '';?>
 <?php echo isset ($js) ? $js : '';?>
