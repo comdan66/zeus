@@ -9,7 +9,7 @@
 <?php echo isset ($js) ? $js : '';?>
 
   <body>
-    <?php echo isset ($hidden) ? $hidden : '';?>
+
     <div class="container">
       <header id="navtop">
         <a href="<?php echo base_url ();?>" class="logo fleft">
@@ -17,16 +17,16 @@
         </a>
         <nav class="fright">
           <ul>
-            <li><a href="<?php echo base_url ();?>" class="navactive">Home</a></li>
+            <li><a href="<?php echo base_url ();?>" class="<?php echo $class == 'main' ? 'navactive' : '';?>">Home</a></li>
           </ul>
           <ul>
-            <li><a href="<?php echo base_url (array ('abouts'));?>">關於宙思</a></li>
+            <li><a href="<?php echo base_url (array ('abouts'));?>" class="<?php echo $class == 'abouts' ? 'navactive' : '';?>">關於宙思</a></li>
           </ul>
           <ul>
-          <li><a href="<?php echo base_url (array ('works', '48'));?>">設計作品</a></li>
+          <li><a href="<?php echo base_url (array ('works', '48'));?>" class="<?php echo $class == 'works' ? 'navactive' : '';?>">設計作品</a></li>
           </ul>
           <ul>
-            <li><a href="<?php echo base_url (array ('contacts'));?>">聯絡我們</a></li>
+            <li><a href="<?php echo base_url (array ('contacts'));?>" class="<?php echo $class == 'contacts' ? 'navactive' : '';?>">聯絡我們</a></li>
           </ul>
         </nav>
       </header>

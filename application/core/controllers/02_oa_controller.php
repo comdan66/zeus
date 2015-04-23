@@ -193,6 +193,7 @@ class Oa_controller extends Root_controller {
     $frame_data = array_merge ($frame_data, $this->load_components ());
     $frame_data['title']   = $this->get_title ();
     $frame_data['content'] = $this->load_content ($data, true);
+    $frame_data['class'] = $this->get_class ();
 
     if ($return) return $this->load->view ($path, $frame_data, $return);
     else $this->load->view ($path, $frame_data, $return)->cache ($cache_time);
