@@ -3,7 +3,7 @@
   <head>
     <?php echo isset ($meta) ? $meta:'';?>
     <title><?php echo isset ($title) ? $title : '';?></title>
-    <link rel="chitorch icon" href="resource/site/images/favicon.ico" />
+    <link rel="chitorch icon" href="<?php echo base_url (array ('resource', 'site', 'images', 'favicon.ico'));?>">
     
 <?php echo isset ($css) ? $css : '';?>
 <?php echo isset ($js) ? $js : '';?>
@@ -23,7 +23,7 @@
             <li><a href="<?php echo base_url (array ('abouts'));?>">關於宙思</a></li>
           </ul>
           <ul>
-          <li><a href="<?php echo base_url (array ('works'));?>">設計作品</a></li>
+          <li><a href="<?php echo base_url (array ('works', '48'));?>">設計作品</a></li>
           </ul>
           <ul>
             <li><a href="<?php echo base_url (array ('contacts'));?>">聯絡我們</a></li>
