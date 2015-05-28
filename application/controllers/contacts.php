@@ -28,7 +28,7 @@ class Contacts extends Site_controller {
     if ($name && $email && $message) {
       $from = $email;
       $to = 'info@zeusdesign.com.tw';
-      $subject = 'Contact form';
+      $subject = "=?UTF-8?B?" . base64_encode ('Contact form') . "?=";
 
       $body = '';
       $body .= 'Name: ' . $name . "\n";
