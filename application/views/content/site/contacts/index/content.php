@@ -16,16 +16,15 @@
     </h6>
 
     <p class="mbottom">
-      235 新北市中和<br >
-      區中和路232號5樓之1 <br >
-      Zhonghe Rd., Zhonghe Dist., <br >
-      New Taipei City 235, <br >
-      Taiwan (R.O.C.)<br >
+      235 新北市中和區<br >
+      興南路一段85巷43號7樓 <br >
+      7F., No.43, Ln. 85, Sec. 1, Xingnan Rd.,<br >
+      Zhonghe Dist., New Taipei City 235, Taiwan(R.O.C.)<br >
     </p>
 
     <p class="mbottom">
-      TEL 02 8242 3885<br />
-      FAX 02 8242 3885
+      TEL 02 2941 6737<br />
+      FAX 02 2941 6737
     </p>
 
     <p class="mbottom">
